@@ -25,7 +25,7 @@ void inicializar_pilha(Pilha *pilha)
     pilha->topo = NULL; 
 }
 
-bool adicionar_elemento_na_pilha(Pilha *pilha, float elemento)
+void adicionar_elemento_na_pilha(Pilha *pilha, float elemento)
 {
     Celula_Pilha *nova_celula_da_pilha = (Celula_Pilha*)malloc(sizeof(Celula_Pilha));
     nova_celula_da_pilha->elemento = elemento;

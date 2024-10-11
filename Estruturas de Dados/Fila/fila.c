@@ -13,7 +13,7 @@ typedef struct Fila
     Celula_Fila *primeiro, *ultimo;
 }Fila;
 
-bool Lista_Vazia(Fila *fila)
+bool fila_vazia(Fila *fila)
 {
     if(fila-> primeiro == NULL)
         return true;
@@ -26,42 +26,53 @@ void inicializar_fila(Fila *fila)
     fila->ultimo = NULL;
 }
 
-bool adicionar_elemento_na_fila(Fila *fila, float elemento)
+void adicionar_elemento_na_fila(Fila *fila, float elemento)
 {
     Celula_Fila *nova_celula_da_fila = (Celula_Fila*)malloc(sizeof(Celula_Fila));
     nova_celula_da_fila->elemento = elemento;
     nova_celula_da_fila->proximo_ponteiro = NULL;
 
-    if(Lista_Vazia(fila))
+    if(fila_vazia(fila))
     {
         fila->primeiro = nova_celula_da_fila;
         fila->ultimo = nova_celula_da_fila;
-        return true;
     }
     else
     {
         fila->ultimo->proximo_ponteiro = nova_celula_da_fila;
         fila->ultimo = nova_celula_da_fila;
-        return true;
     }
-    return false;
 }
 
 Celula_Fila* remover_elemento_na_fila(Fila *fila)
 {
-    Celula_Fila *temporario = fila->primeiro;
-    fila->primeiro = fila->primeiro->proximo_ponteiro;
-    return temporario;
+    if(fila_vazia(fila))
+    {
+        printf("Lista Vazia\n");
+    }
+    else
+    {
+        Celula_Fila *temporario = fila->primeiro;
+        fila->primeiro = fila->primeiro->proximo_ponteiro;
+        return temporario;
+    }
 }
 
 void percorrer_elementos_na_fila(Fila *fila)
 {
-    Celula_Fila *temporario = fila->primeiro;
-    while(temporario != NULL)
+    if(fila_vazia(fila))
     {
-        printf("Elemento: %.2f\n",temporario->elemento);
-        temporario = temporario->proximo_ponteiro;
+        printf("Lista Vazia\n");
     }
+    else
+    {
+        Celula_Fila *temporario = fila->primeiro;
+        while(temporario != NULL)
+        {
+            printf("Elemento: %.2f\n",temporario->elemento);
+            temporario = temporario->proximo_ponteiro;
+        }
+    }  
 }
 
 int main()
